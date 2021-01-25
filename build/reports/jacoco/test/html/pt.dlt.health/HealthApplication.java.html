@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HealthApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">health</a> &gt; <a href="index.source.html" class="el_package">pt.dlt.health</a> &gt; <span class="el_source">HealthApplication.java</span></div><h1>HealthApplication.java</h1><pre class="source lang-java linenums">package pt.dlt.health;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import pt.dlt.health.dto.Appointment;
+import pt.dlt.health.dto.Doctor;
+import pt.dlt.health.dto.Patient;
+import pt.dlt.health.repository.AppointmentRepository;
+import pt.dlt.health.repository.DoctorRepository;
+import pt.dlt.health.repository.PatientRepository;
+
+@SpringBootApplication
+<span class="nc" id="L19">public class HealthApplication extends SpringBootServletInitializer {</span>
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+<span class="nc" id="L23">		return application.sources(HealthApplication.class);</span>
+	}
+	
+	public static void main(String[] args) {
+<span class="nc" id="L27">		SpringApplication.run(HealthApplication.class, args);</span>
+<span class="nc" id="L28">	}</span>
+	
+	@Bean
+	public CommandLineRunner demo(DoctorRepository doctorRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
+<span class="nc" id="L32">		return args -&gt; {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">			if (doctorRepository.count() == 0) {</span>
+<span class="nc" id="L34">				Doctor d1 = new Doctor(&quot;JoÃ£o Silva&quot;, 'M', LocalDate.parse(&quot;1980-03-14&quot;), 13615516, 252945644, 916338296, &quot;Rua da Agonia&quot;, 30000.00, &quot;FAMILY_MEDICINE&quot;);</span>
+<span class="nc" id="L35">				Doctor d2 = new Doctor(&quot;Joana Silva&quot;, 'F', LocalDate.parse(&quot;1975-05-04&quot;), 13615515, 252945642, 916338298, &quot;Rua dos Prazeres&quot;, 38000.00, &quot;UROLOGY&quot;);</span>
+<span class="nc" id="L36">				Doctor d3 = new Doctor(&quot;Maria Silva&quot;, 'F', LocalDate.parse(&quot;1970-06-30&quot;), 13615514, 252945640, 916338294, &quot;Rua da DesgraÃ§a&quot;, 35000.00, &quot;PSYCHIATRY&quot;);</span>
+<span class="nc" id="L37">				doctorRepository.save(d1);</span>
+<span class="nc" id="L38">				doctorRepository.save(d2);</span>
+<span class="nc" id="L39">				doctorRepository.save(d3);</span>
+				
+<span class="nc" id="L41">				Patient p1 = new Patient(&quot;Pedro Silva&quot;, 'M', LocalDate.parse(&quot;1980-03-14&quot;), 13615513, 252945638, 916338292, &quot;Rua da Agonia&quot;, 82537843203l, &quot;SA4314819-B&quot;);</span>
+<span class="nc" id="L42">				Patient p2 = new Patient(&quot;Beatriz Silva&quot;, 'F', LocalDate.parse(&quot;1975-05-04&quot;), 13615512, 252945636, 916338290, &quot;Rua dos Prazeres&quot;, 82537843202l, &quot;SA4314832-A&quot;);</span>
+<span class="nc" id="L43">				Patient p3 = new Patient(&quot;JosÃ© Silva&quot;, 'M', LocalDate.parse(&quot;1970-06-30&quot;), 13615511, 252945634, 916338288, &quot;Rua da DesgraÃ§a&quot;, 82537843201l, &quot;SA4314856-B&quot;);</span>
+<span class="nc" id="L44">				Patient p4 = new Patient(&quot;Rute Silva&quot;, 'F', LocalDate.parse(&quot;1980-03-14&quot;), 13615510, 252945632, 916338286, &quot;Rua da Agonia&quot;, 82537843200l, &quot;SA4314834-C&quot;);</span>
+<span class="nc" id="L45">				Patient p5 = new Patient(&quot;Manuel Silva&quot;, 'M', LocalDate.parse(&quot;1980-03-14&quot;), 13615513, 252945638, 916338292, &quot;Rua da Agonia&quot;, 82537843203l, &quot;SA4314819-B&quot;);</span>
+<span class="nc" id="L46">				Patient p6 = new Patient(&quot;Filipa Silva&quot;, 'F', LocalDate.parse(&quot;1975-05-04&quot;), 13615512, 252945636, 916338290, &quot;Rua dos Prazeres&quot;, 82537843202l, &quot;SA4314832-A&quot;);</span>
+<span class="nc" id="L47">				Patient p7 = new Patient(&quot;Joaquim Silva&quot;, 'M', LocalDate.parse(&quot;1970-06-30&quot;), 13615511, 252945634, 916338288, &quot;Rua da DesgraÃ§a&quot;, 82537843201l, &quot;SA4314856-B&quot;);</span>
+<span class="nc" id="L48">				Patient p8 = new Patient(&quot;Sara Silva&quot;, 'F', LocalDate.parse(&quot;1980-03-14&quot;), 13615510, 252945632, 916338286, &quot;Rua da Agonia&quot;, 82537843200l, &quot;SA4314834-C&quot;);</span>
+<span class="nc" id="L49">				patientRepository.save(p1);</span>
+<span class="nc" id="L50">				patientRepository.save(p2);</span>
+<span class="nc" id="L51">				patientRepository.save(p3);</span>
+<span class="nc" id="L52">				patientRepository.save(p4);</span>
+<span class="nc" id="L53">				patientRepository.save(p5);</span>
+<span class="nc" id="L54">				patientRepository.save(p6);</span>
+<span class="nc" id="L55">				patientRepository.save(p7);</span>
+<span class="nc" id="L56">				patientRepository.save(p8);</span>
+				
+<span class="nc" id="L58">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-28T09:00:00&quot;), LocalDateTime.parse(&quot;2019-09-28T10:00:00&quot;), p1, d3));</span>
+<span class="nc" id="L59">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-26T11:00:00&quot;), LocalDateTime.parse(&quot;2019-09-26T12:00:00&quot;), p2, d1));</span>
+<span class="nc" id="L60">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-26T13:00:00&quot;), LocalDateTime.parse(&quot;2019-09-26T14:00:00&quot;), p3, d3));</span>
+<span class="nc" id="L61">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-26T15:30:00&quot;), LocalDateTime.parse(&quot;2019-09-26T16:30:00&quot;), p4, d2));</span>
+<span class="nc" id="L62">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-27T09:00:00&quot;), LocalDateTime.parse(&quot;2019-09-27T10:00:00&quot;), p5, d3));</span>
+<span class="nc" id="L63">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-27T12:00:00&quot;), LocalDateTime.parse(&quot;2019-09-27T13:00:00&quot;), p6, d2));</span>
+<span class="nc" id="L64">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-27T14:30:00&quot;), LocalDateTime.parse(&quot;2019-09-27T15:30:00&quot;), p7, d3));</span>
+<span class="nc" id="L65">				appointmentRepository.save(new Appointment(LocalDateTime.parse(&quot;2019-09-27T17:00:00&quot;), LocalDateTime.parse(&quot;2019-09-27T18:00:00&quot;), p8, d1));</span>
+			}
+<span class="nc" id="L67">		};</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

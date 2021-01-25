@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Appointment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">health</a> &gt; <a href="index.source.html" class="el_package">pt.dlt.health.dto</a> &gt; <span class="el_source">Appointment.java</span></div><h1>Appointment.java</h1><pre class="source lang-java linenums">package pt.dlt.health.dto;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Appointment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    @OneToOne(targetEntity = Patient.class)
+    private Patient patient;
+    @OneToOne(targetEntity = Doctor.class)
+    private Doctor doctor;
+
+<span class="nc" id="L24">    public Appointment() {</span>
+
+<span class="nc" id="L26">    }</span>
+
+<span class="nc" id="L28">    public Appointment(LocalDateTime startDate, LocalDateTime endDate, Patient patient, Doctor doctor) {</span>
+<span class="nc" id="L29">        this.startDate = startDate;</span>
+<span class="nc" id="L30">        this.endDate = endDate;</span>
+<span class="nc" id="L31">        this.patient = patient;</span>
+<span class="nc" id="L32">        this.doctor = doctor;</span>
+<span class="nc" id="L33">    }</span>
+
+    public long getId() {
+<span class="nc" id="L36">        return id;</span>
+    }
+
+    public void setId(long id) {
+<span class="nc" id="L40">        this.id = id;</span>
+<span class="nc" id="L41">    }</span>
+
+    public LocalDateTime getStartDate() {
+<span class="nc" id="L44">        return startDate;</span>
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+<span class="nc" id="L48">        this.startDate = startDate;</span>
+<span class="nc" id="L49">    }</span>
+
+    public LocalDateTime getEndDate() {
+<span class="nc" id="L52">        return endDate;</span>
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+<span class="nc" id="L56">        this.endDate = endDate;</span>
+<span class="nc" id="L57">    }</span>
+
+    public Duration getDuration() {
+<span class="nc" id="L60">        return Duration.between(startDate, endDate);</span>
+    }
+
+    public Patient getPatient() {
+<span class="nc" id="L64">        return patient;</span>
+    }
+
+    public void setPatient(Patient patient) {
+<span class="nc" id="L68">        this.patient = patient;</span>
+<span class="nc" id="L69">    }</span>
+
+    public Doctor getDoctor() {
+<span class="nc" id="L72">        return doctor;</span>
+    }
+
+    public void setDoctor(Doctor doctor) {
+<span class="nc" id="L76">        this.doctor = doctor;</span>
+<span class="nc" id="L77">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

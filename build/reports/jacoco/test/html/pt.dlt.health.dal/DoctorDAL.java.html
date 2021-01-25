@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorDAL.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">health</a> &gt; <a href="index.source.html" class="el_package">pt.dlt.health.dal</a> &gt; <span class="el_source">DoctorDAL.java</span></div><h1>DoctorDAL.java</h1><pre class="source lang-java linenums">package pt.dlt.health.dal;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import pt.dlt.health.aspect.CustomLogger;
+import pt.dlt.health.dto.Doctor;
+import pt.dlt.health.exception.NoDoctorFoundException;
+import pt.dlt.health.repository.DoctorRepository;
+
+@Controller
+<span class="nc" id="L14">public class DoctorDAL {</span>
+
+    private @Autowired DoctorRepository doctorRepository;
+
+    @CustomLogger
+    public List&lt;Doctor&gt; getListDoctor() {
+<span class="nc" id="L20">        List&lt;Doctor&gt; doctors = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L21">        doctorRepository.findAll().forEach(doctors::add);</span>
+<span class="nc" id="L22">        return doctors;</span>
+    }
+
+    @CustomLogger
+    public Doctor createDoctor(Doctor doctor) {
+<span class="nc" id="L27">        Doctor newDoctor = doctorRepository.save(doctor);</span>
+<span class="nc" id="L28">        return newDoctor;</span>
+    }
+
+    @CustomLogger
+    public Doctor getDoctor(Long id) throws NoDoctorFoundException {
+<span class="nc" id="L33">        Optional&lt;Doctor&gt; response = doctorRepository.findById(id);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (response.isEmpty()) {</span>
+<span class="nc" id="L35">            throw new NoDoctorFoundException();</span>
+        }
+<span class="nc" id="L37">        return response.get();</span>
+    }
+
+    @CustomLogger
+    public Doctor updateDoctor(Doctor doctor) throws NoDoctorFoundException {
+<span class="nc" id="L42">        Optional&lt;Doctor&gt; response = doctorRepository.findById(doctor.getId());</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (response.isEmpty()) {</span>
+<span class="nc" id="L44">            throw new NoDoctorFoundException();</span>
+        }
+<span class="nc" id="L46">        Doctor dbDoctor = response.get();</span>
+<span class="nc" id="L47">        dbDoctor.setName(doctor.getName());</span>
+<span class="nc" id="L48">        dbDoctor.setPhoneNumber(doctor.getPhoneNumber());</span>
+<span class="nc" id="L49">        dbDoctor.setGender(doctor.getGender());</span>
+<span class="nc" id="L50">        dbDoctor.setAddress(doctor.getAddress());</span>
+<span class="nc" id="L51">        dbDoctor.setWage(doctor.getWage());</span>
+<span class="nc" id="L52">        dbDoctor.setSpeciality(doctor.getSpeciality());</span>
+<span class="nc" id="L53">        doctorRepository.save(dbDoctor);</span>
+<span class="nc" id="L54">        return dbDoctor;</span>
+    }
+
+    @CustomLogger
+    public void deleteDoctor(Long id) throws NoDoctorFoundException {
+<span class="nc" id="L59">        Optional&lt;Doctor&gt; response = doctorRepository.findById(id);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (response.isEmpty()) {</span>
+<span class="nc" id="L61">            throw new NoDoctorFoundException();</span>
+        }
+<span class="nc" id="L63">        doctorRepository.delete(response.get());</span>
+<span class="nc" id="L64">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

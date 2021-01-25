@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientBL.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">health</a> &gt; <a href="index.source.html" class="el_package">pt.dlt.health.bl</a> &gt; <span class="el_source">PatientBL.java</span></div><h1>PatientBL.java</h1><pre class="source lang-java linenums">package pt.dlt.health.bl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import pt.dlt.health.dal.PatientDAL;
+import pt.dlt.health.dto.Patient;
+import pt.dlt.health.exception.NoPatientFoundException;
+
+@Controller
+<span class="nc" id="L11">public class PatientBL {</span>
+
+	private @Autowired PatientDAL patientDAL;
+
+	public List&lt;Patient&gt; getListPatient() {
+<span class="nc" id="L16">		return patientDAL.getListPatient();</span>
+	}
+
+	public Patient createPatient(Patient p) {
+<span class="nc" id="L20">		return patientDAL.createPatient(p);</span>
+	}
+
+	public Patient getPatient(Long id) throws NoPatientFoundException {
+<span class="nc" id="L24">		return patientDAL.getPatient(id);</span>
+	}
+
+	public Patient updatePatient(Patient p) throws NoPatientFoundException {
+<span class="nc" id="L28">		return patientDAL.updatePatient(p);</span>
+	}
+
+	public void deletePatient(Long id) throws NoPatientFoundException {
+<span class="nc" id="L32">        patientDAL.deletePatient(id);</span>
+<span class="nc" id="L33">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
