@@ -1,14 +1,8 @@
-properties([
-  parameters([
-    string(name: 'ENV', defaultValue: 'int', description: 'The target environment', ), //use a choices block instead(dev,int,prod)
-    //choice(name: 'REGION', choices: ['eu-central-1', 'us-east-1'], description: 'The deployment region', )
-   ])
-])
-
 pipeline{
     agent {
+
         node {
-            label 'jaws-slaves'
+            label 'health'
         }
     }
 
@@ -30,12 +24,12 @@ pipeline{
 
     stages{
         stage('Gradle: Build'){
-            tools{
-                jdk "JDK 11"
-            }
+            //tools{
+              //  jdk "JDK 11"
+            //}
 
             steps{
-                sh 'chmod +x gradlew'
+               // sh 'chmod +x gradlew'
                 sh './gradlew clean build -x test --console=plain'
             }
         }
@@ -67,6 +61,17 @@ pipeline{
              sourcePattern: '**/coverage/**',
              inclusionPattern: '**/*.class'
         )
+
+        node {
+            stage('SCM') {
+                git 'https://github.com/foo/bar.git'
+            }
+            stage('SonarQube analysis') {
+                withSonarQubeEnv() { // Will pick the global server connection you have configured
+                sh './gradlew sonarqube'
+                }
+            }
+
 
        /* stage('Kubernetes: Replace running pods') {
             steps {
