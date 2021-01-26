@@ -1,4 +1,7 @@
 pipeline{
+
+    agent any
+    
     stages{
         stage('Gradle: Build'){
             steps{
@@ -21,6 +24,6 @@ pipeline{
                     sh './gradlew sonarqube'
                 }        
            }
-        }s
+        }
     }
 }
