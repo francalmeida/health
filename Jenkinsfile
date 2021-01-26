@@ -55,26 +55,15 @@ pipeline{
             }
         }
 
-        stage('jacoco'){
-            jacoco(
-             execPattern: '**/path_to_file/jacoco.exec',
-             classPattern: '**/coverage/**',
-             sourcePattern: '**/coverage/**',
-             inclusionPattern: '**/*.class'
-             )
-        }
+       
         
         stage("sonarqube"){
-            node {
-            stage('SCM') {
-                git 'https://github.com/foo/bar.git'
-            }
-            stage('SonarQube analysis') {
+           
+           steps{
                 withSonarQubeEnv() { // Will pick the global server connection you have configured
                 sh './gradlew sonarqube'
-                }
-            }
-        }
+                }        
+           }
         }
         
 
