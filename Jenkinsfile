@@ -55,14 +55,17 @@ pipeline{
             }
         }
 
-        jacoco(
+        stage('jacoco'){
+            jacoco(
              execPattern: '**/path_to_file/jacoco.exec',
              classPattern: '**/coverage/**',
              sourcePattern: '**/coverage/**',
              inclusionPattern: '**/*.class'
-        )
-
-        node {
+             )
+        }
+        
+        stage("sonarqube"){
+            node {
             stage('SCM') {
                 git 'https://github.com/foo/bar.git'
             }
@@ -72,6 +75,8 @@ pipeline{
                 }
             }
         }
+        }
+        
 
        /* stage('Kubernetes: Replace running pods') {
             steps {
