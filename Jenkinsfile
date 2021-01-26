@@ -71,7 +71,7 @@ pipeline{
                 sh './gradlew sonarqube'
                 }
             }
-
+        }
 
        /* stage('Kubernetes: Replace running pods') {
             steps {
@@ -83,5 +83,5 @@ pipeline{
                 }
             }
         }*/
-
+    }
 }
