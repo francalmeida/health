@@ -5,14 +5,14 @@ pipeline{
     stages{
         stage('Gradle: Build'){
             steps{
-                sh 'chmod +x gradlew'
-                sh './gradlew clean build'
+                bat 'chmod +x gradlew'
+                bat './gradlew clean build'
             }
         }
 
         stage('Jacoco') {
             steps {
-                sh 'build/jacoco/*.exec'
+                bat 'build/jacoco/*.exec'
                 junit '**/classes'
                 step( [ $class: 'JacocoPublisher' ] )
             }
@@ -21,7 +21,7 @@ pipeline{
         stage("sonarqube"){
            steps{
                 withSonarQubeEnv("teste") {
-                    sh './gradlew sonarqube'
+                    bat './gradlew sonarqube'
                 }        
            }
         }
