@@ -22,10 +22,10 @@ pipeline{
 
         stage('Sonarqube') {
             environment {
-                scannerHome = tool 'SonarScanner'
+                scannerHome = tool 'SonarQuBe'
             }    
             steps {
-                withSonarQubeEnv('sonarqube') {
+                withSonarQubeEnv('SonarQuBe') {
                     bat "${scannerHome}/bin/sonar-scanner"
                 }       
             }
