@@ -11,9 +11,12 @@ pipeline{
 
         stage('Jacoco') {
             steps {
-                bat 'build/jacoco/*.exec'
-                junit '**/classes'
-                step( [ $class: 'JacocoPublisher' ] )
+               jacoco( 
+                    execPattern: "build/jacoco/*.exec",
+                    classPattern: '**/classes',
+                    sourcePattern: '**/src/main/java',
+                    inclusionPattern: '**/*.java,**/*.groovy,**/*.kt,**/*.kts'
+                )
             }
         }
 
