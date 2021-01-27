@@ -20,12 +20,20 @@ pipeline{
             }
         }
 
-        stage("sonarqube"){
-           steps{
-                withSonarQubeEnv("teste") {
-                    bat './gradlew sonarqube'
-                }        
-           }
+        stage('Sonarqube') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }    
+            steps {
+            withSonarQubeEnv('sonarqube') {
+                bat "${scannerHome}/bin/sonar-scanner"
+            }        timeout(time: 10, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+            }
+        }
         }
     }
 }
+
+//sonar.projectKey=health
+//sonar.java.binaries= build/classes/
