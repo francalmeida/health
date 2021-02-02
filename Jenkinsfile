@@ -1,7 +1,5 @@
 pipeline{
-     environment {
-                scannerHome = tool 'SonarQuBe'
-            } 
+     
     agent any
     
     stages{
@@ -22,14 +20,17 @@ pipeline{
             }
         }
 
-       stage('Sonarqube') {
-              steps {
-            withSonarQubeEnv('SonarQuBe') {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }        timeout(time: 10, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
+         stages {
+            stage('SonarQube analysis') {
+            tools {
+                sonarQube 'SonarQube Scanner 2.8'
             }
-         }
-        }
+            steps {
+                withSonarQubeEnv('SonarQube Scanner') {
+                sh 'sonar-scanner'
+                }
+            }
+    }
+  }
     }
 }
