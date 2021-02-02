@@ -22,7 +22,7 @@ pipeline{
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube Scanner 2.8') {
+                withSonarQubeEnv('sonarQube') {
                 bat 'sonar-scanner'
                 }
             }
