@@ -24,7 +24,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonarQube') {
                  bat './gradlew sonarqube'
-                 println ${env.http://localhost:9000"}
+                 println ${http://localhost:9000}
                 }
             }
         }
