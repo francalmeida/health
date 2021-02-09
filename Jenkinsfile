@@ -28,7 +28,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonarQube') {
                  bat './gradlew sonarqube'
-                 println ${env.SONAR_HOST_URL}
+                 echo "${SONAR_HOST_URL}"
                 }
             }
         }
